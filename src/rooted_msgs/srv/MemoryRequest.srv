@@ -1,0 +1,4 @@
+string db_name
+string command
+---
+string result

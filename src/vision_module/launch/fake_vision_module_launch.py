@@ -1,0 +1,20 @@
+from launch import LaunchDescription
+from launch_ros.actions import Node
+
+def generate_launch_description():
+    return LaunchDescription([
+        Node(
+            package='robot_memory',
+            executable='memory_server',
+            name='memory_server_node',
+            output='screen',
+            emulate_tty=True,
+            parameters=[
+                {'db_folder_path':'/home/plantroid/rooted/src/robot_memory/db/people.db',
+                 'use_pc_camera':'True',
+                 'camera_number':'0',
+                 'camera_topic':'/camera/image_raw',
+                 }
+            ]
+        )
+    ])

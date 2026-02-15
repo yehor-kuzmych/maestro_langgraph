@@ -1,0 +1,10 @@
+# HighLevelAction.action
+
+# Goal
+string command
+---
+# Feedback
+string status
+---
+# Result
+string result

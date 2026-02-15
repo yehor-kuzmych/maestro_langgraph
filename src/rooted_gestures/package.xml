@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>rooted_gestures</name>
+  <version>1.0.0</version>
+  <description>Packahe responsible for implementing the body language commands of the robot, such as rotating the boddy clock and counter-clockwise when it says no, or shaking its head up and down when saying yes.</description>
+  <maintainer email="antonio@mizuuchi.lab.tuat.ac.jp">Antonio Galiza Cerdeira Gonzalez</maintainer>
+  <license>Apache License 2.0</license>
+
+  <depend>rclpy</depend>
+  <depend>rooted_msgs</depend>
+  <depend>rooted_encoders</depend>
+  <depend>plantroid_neck</depend>
+
+
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

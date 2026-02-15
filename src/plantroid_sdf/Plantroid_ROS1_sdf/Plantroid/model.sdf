@@ -1,0 +1,279 @@
+<?xml version='1.0'?>
+<sdf version='1.4'>
+  <model name="Plantroid">
+    <static>false</static>
+    <link name='chassis'>
+      <pose>0 0 .015 0 0 0</pose>
+      <mass>5</mass>
+      <inertia>
+        <ixx>0.0079</ixx>
+        <iyy>0.00854</iyy>
+        <izz>0.006</izz>
+      </inertia>
+      <collision name='collision'>
+        <pose>0.04 0.1 .0825 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>.275 .42 0.165 </size>
+          </box>
+        </geometry>
+      </collision>
+
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://Plantroid/meshes/PlantroidBase.stl</uri>
+            <scale>0.00125 0.00125 0.00125</scale>
+          </mesh>
+        </geometry>
+      </visual>
+
+      <collision name='caster_collision'>
+        <pose>0.16 0.1025 -.025 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>.01</radius>
+          </sphere>
+        </geometry>
+
+        <surface>
+          <friction>
+            <ode>
+            <mu>0</mu>
+            <mu2>0</mu2>
+            <slip1>0.0</slip1>
+            <slip2>0.0</slip2>
+          </ode>
+          </friction>
+        </surface>
+      </collision>
+
+      <visual name='caster_visual_cylinder'>
+        <pose>0.16 0.1025 -.0125 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>.01</radius>
+            <length>.02</length>
+          </cylinder>
+        </geometry>
+      </visual>
+
+      <visual name='caster_visual_ball'>
+        <pose>0.16 0.1025 -.025 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>.01</radius>
+          </sphere>
+        </geometry>
+      </visual>
+    </link>
+
+    <link name="left_wheel">
+      <pose>-0.024 0.225 0.041 0 1.5707 1.5707</pose>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <radius>.06</radius>
+            <length>.01</length>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='visual'>
+        <pose>0 0 0 1.5707 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://Plantroid/meshes/Wheel.stl</uri>
+            <scale>0.00125 0.00125 0.00125</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+
+    <link name="right_wheel">
+      <pose>-0.024 -.0225 0.041 0 1.5707 1.5707</pose>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <radius>.06</radius>
+            <length>.01</length>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='visual'>
+        <pose>0 0 0 1.5707 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://Plantroid/meshes/Wheel.stl</uri>
+            <scale>0.00125 0.00125 0.00125</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+
+    <link name="head">
+      <pose>0.105 .09 0.295 0 0 0</pose>
+      <collision name="collision">
+        <pose>0.07 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.045 0.2375 0.19</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://Plantroid/meshes/PlantroidHead.stl</uri>
+            <scale>0.00125 0.00125 0.00125</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+
+    <joint type="revolute" name="left_wheel_hinge">
+      <pose>0 0 0 0 0 0</pose>
+      <child>left_wheel</child>
+      <parent>chassis</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+
+    <joint type="revolute" name="right_wheel_hinge">
+      <pose>0 0 0 0 0 0</pose>
+      <child>right_wheel</child>
+      <parent>chassis</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+
+    <joint type="revolute" name="head_hinge">
+      <pose>0 .09 0.135 0 0 0</pose>
+      <child>head</child>
+      <parent>chassis</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+      <dynamics damping="0.0" friction="2000.0" />
+    </joint>
+
+    <plugin name="Plantroid_diff_drive" filename="libgazebo_ros_diff_drive.so">
+
+      <ros>
+        <!-- <namespace>/tb3</namespace> -->
+      </ros>
+
+      <updateRate>30</updateRate>
+
+      <!-- wheels -->
+      <leftJoint>left_wheel_hinge</leftJoint>
+      <rightJoint>right_wheel_hinge</rightJoint>
+
+      <!-- kinematics -->
+      <wheelSeparation>0.160</wheelSeparation>
+      <wheelDiameter>0.045</wheelDiameter>
+
+      <!-- limits -->
+      <maxWheelTorque>1</maxWheelTorque>
+      <maxWheelAcceleration>0.1</maxWheelAcceleration>
+
+      <commandTopic>cmd_vel</commandTopic>
+
+      <!-- output -->
+      <publishOdom>true</publishOdom>
+      <publishOdomTF>true</publishOdomTF>
+      <publishWheelTF>false</publishWheelTF>
+
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <robotBaseFrame>base_footprint</robotBaseFrame>
+
+    </plugin>
+
+    <plugin name="Plantroid_joint_state" filename="libgazebo_ros_joint_state_publisher.so">
+      <ros>
+        <!-- <namespace>/tb3</namespace> -->
+        <remapping>~/out:=joint_states</remapping>
+      </ros>
+      <update_rate>30</update_rate>
+      <joint_name>left_wheel_hinge</joint_name>
+      <joint_name>right_wheel_hinge</joint_name>
+      <joint_name>head_hinge</joint_name>
+    </plugin>
+
+    <link name="OKAO_Vision_link">
+      <pose>0.2 0.08 0.37 0 0 0</pose>
+      <inertial>
+        <mass>0.000000001</mass>
+        <inertia>
+          <ixx>0.000166667</ixx>
+          <iyy>0.000166667</iyy>
+          <izz>0.000166667</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.001 0.03 0.03</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.001 0.03 0.03</size>
+          </box>
+        </geometry>
+      </visual>
+      <sensor name="camera" type="camera">
+        <camera>
+          <horizontal_fov>0.8726646259971648</horizontal_fov>
+          <image>
+            <width>240</width>
+            <height>320</height>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>100</far>
+          </clip>
+        </camera>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <visualize>true</visualize>
+        <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+          <alwaysOn>true</alwaysOn>
+          <updateRate>0.0</updateRate>
+          <cameraName>camera</cameraName>
+          <imageTopicName>image_raw</imageTopicName>
+          <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+          <frameName>camera_link_optical</frameName>
+          <!-- setting hackBaseline to anything but 0.0 will cause a misalignment
+                   between the gazebo sensor image and the frame it is supposed to
+                   be attached to -->
+          <hackBaseline>0.0</hackBaseline>
+          <distortionK1>0.0</distortionK1>
+          <distortionK2>0.0</distortionK2>
+          <distortionK3>0.0</distortionK3>
+          <distortionT1>0.0</distortionT1>
+          <distortionT2>0.0</distortionT2>
+          <CxPrime>0</CxPrime>
+          <Cx>0.0</Cx>
+          <Cy>0.0</Cy>
+          <focalLength>0.0</focalLength>
+        </plugin>
+      </sensor>
+    </link>
+
+    <joint type="fixed" name="camera_joint">
+      <pose>0 0 0 0 0 0</pose>
+      <child>OKAO_Vision_link</child>
+      <parent>head</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+
+  </model>
+</sdf>

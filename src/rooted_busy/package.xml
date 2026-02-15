@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>rooted_busy</name>
+  <version>1.0.0</version>
+  <description>server that blocks other robot movements when the robot is busy,  blovking gestures while the robot is busy looking for sunligh, for example.</description>
+  <maintainer email="antonio@mizuuchi.lab.tuat.ac.jp">Antonio Galiza Cerdeira Gonzalez</maintainer>
+  <license>Apache License 2.0</license>
+
+  <depend>rclpy</depend>
+  <depend>rooted_encoder</depend>
+  <depend>rooted_gestures</depend>
+  <depend>rooted_msgs</depend>
+
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

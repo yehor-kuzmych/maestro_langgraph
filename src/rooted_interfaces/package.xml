@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>rooted_interfaces</name>
+  <version>1.0.0</version>
+  <description>The rooted_interfaces package</description>
+  <maintainer email="antonio@mizuuchi.lab.com">Antonio Galiza Cerdeira Gonzalez</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>ament_python</buildtool_depend>
+
+  <depend>facial_expression</depend>
+  <depend>listening_module</depend>
+  <depend>movement_module</depend>
+  <depend>other_sensors</depend>
+  <depend>plantroid_neck</depend>
+  <depend>robot_memory</depend>
+  <depend>rooted_busy</depend>
+  <depend>rooted_gestures</depend>
+  <depend>rooted_llm</depend>
+  <depend>rooted_msgs</depend>
+  <depend>rooted_speech_synthesizer</depend>
+  <depend>vision_module</depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

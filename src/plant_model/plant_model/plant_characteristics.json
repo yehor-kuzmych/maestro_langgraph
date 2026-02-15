@@ -1,0 +1,24 @@
+{
+    "plant": {
+        "name": "Ficus",
+        "type": "indoor",
+        "height_cm": 50,
+        "health": {
+            "soil_moisture": 60,
+            "nutrients": {
+                "N": 15,
+                "P": 10,
+                "K": 20
+            },
+            "pH": 6.5
+        },
+        "environment": {
+            "temperature": 24,
+            "light": {
+                "morning": 500,
+                "noon": 1000,
+                "evening": 200
+            }
+        }
+    }
+}

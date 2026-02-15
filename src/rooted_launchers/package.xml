@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>rooted_launchers</name>
+  <version>1.0.0</version>
+  <description>Dummy package that collects all of the launch files for Social Plantroid</description>
+  <maintainer email="antonio@mizuuchi.lab.tuat.ac.jp">Antono Galiza Cerdeira Gonzalez</maintainer>
+  <license>Apache License 2.0</license>
+
+  <depend>rclpy</depend>
+  <depend>speech_recogntion</depend>
+  <depend>uuid</depend>
+  <depend>opencv-python</depend>
+  <depend>tensorflow</depend>
+  <depend>rooted_busy</depend>
+  <depend>rooted_encoder</depend>
+  <depend>rooted_gestures</depend>
+  <depend>rooted_llm</depend>
+  <depend>rooted_maestro</depend>
+  <depend>rooted_msgs</depend>
+  <depend>navigation_module</depend>
+  <depend>plantroid_neck</depend>
+  <depend>other_sensors</depend>
+  <depend>listening_module</depend>
+  <depend>vision_module</depend>
+
+  <!--depend>plant_model</depend>
+  <!depend>plantroid_memory</depend-->
+
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
